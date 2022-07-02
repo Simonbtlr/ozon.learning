@@ -41,7 +41,7 @@ with_named() {
         esac
     done
 
-    shift $((OPTIND-1))
+    shift $((OPTIND-1)) 
     [ "$1" = '--' ] && shift
 
     echo "
