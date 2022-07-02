@@ -1,0 +1,42 @@
+<body>
+    <section class="app vue-app">
+        <h1>{{title}}</h1>
+        <h2>Welcome to the Vue course from Route 256!</h2>
+        <p>Counter: {{counter}}</p>
+    </section>
+    <hr>
+    <section class="app js-app">
+        <h1 class="title"></h1>
+        <h2>Welcome to the Vue course from Route 256!</h2>
+        <p>Counter: <span class="counter"></span></p>
+    </section>
+
+    <script>
+        // 1. Vue
+        const $vue = new Vue({
+            el: '.vue-app',
+            data: {
+                title: 'VUE',
+                counter: 1
+            }
+        });
+    </script>
+
+    <script>
+        // 2. JavaScript
+        const $js = data = {
+            title: 'JS',
+            counter: 1
+        };
+        const counterEl = document.querySelector('.js-app .counter');
+        const titelEl = document.querySelector('.js-app .title');
+
+        if (counterEl) {
+            counterEl.textContent = data.counter;
+        }
+
+        if (titelEl) {
+            titelEl.textContent = data.title;
+        }
+    </script>
+</body>

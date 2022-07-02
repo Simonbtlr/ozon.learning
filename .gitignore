@@ -1,5 +1,13 @@
 # Mac OS
 .DS_Store
+node_modules/
+/dist
+/public
+
+# Log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Editor directories and files
 .vscode
