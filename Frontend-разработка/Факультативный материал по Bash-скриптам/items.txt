@@ -1,0 +1,4 @@
+Samsung
+Apple
+Microsoft
+Google
