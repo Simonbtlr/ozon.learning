@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Readctivity</title>
+        <link rel="stylesheet" href="./style/index.css">
+        <link rel="icon" href="./images/vue-logo.svg">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    </head>
+
+    <body>
+        <section class="app vue-app">
+            <h1>VUE</h1>
+            <h2>Welcome to the Vue course from Route 256!</h2>
+            <p>Counter: {{counter}} + 2 = {{sum}}</p>
+            <button class="button" v-on:click="incrementCounterHandler">+1</button>
+        </section>
+    
+        <hr>
+
+        <section class="app js-app">
+            <h1>JS</h1>
+            <h2>Welcome to the Vue course from Route 256!</h2>
+            <p>Counter: <span class="counter"></span> + 2 = <span class="sum"></span></p>
+            <button class="button">+1</button>
+            <p class="demo"></p>
+        </section>
+        
+        <script>
+            var app = new Vue({
+                el: '.vue-app',
+                data: {
+                    counter: 1
+                },
+                methods: {
+                    incrementCounterHandler() {
+                        this.counter += 1;
+                    }
+                },
+                computed: {
+                    sum() {
+                        return this.counter + 2;
+                    }
+                }
+            });
+        </script>
+ 
+        <script>
+            const data = { 
+                counter: 1,
+                counter2: 0,
+                counter3: 2
+            };
+            const counterEl = document.querySelector('.js-app .counter');
+            const buttonEl = document.querySelector('.js-app .button');
+            const sumEl = document.querySelector('.js-app .sum');
+
+            const incrementCounterHandler = function() {
+                data.counter += 1;
+                counterEl.textContent = data.counter;
+            }
+
+            function getSum() {
+                const sum = data.counter + 2;
+                
+                return sum;
+            }
+
+            const queue = [getSum];
+
+            let num = 1;
+            
+            function additionalFunctions() {
+                const demo = document.querySelector('.js-app .demo');
+                const span = document.createElement('span');
+
+                span.textContent = `One more function #${num++},  `;
+                demo.appendChild(span);
+            }
+        
+            Object.keys(data).forEach(x => {
+                let value = data[x];    //data.counter, data.counter2, data.counter3
+
+                Object.defineProperty(data, x, {
+                    get: function() {
+                        console.log('get');
+
+                        queue.push(additionalFunctions);
+
+                        return value;
+                    },
+                    set: function(newValue) {
+                        console.log('set');
+
+                        queue.forEach(x => x());
+
+                        value = newValue;
+                    }
+                });
+            });
+
+            counterEl.textContent = data.counter;
+            sumEl.textContent = getSum();
+            buttonEl.addEventListener('click', incrementCounterHandler);
+        </script>
+    </body>
+</html>
